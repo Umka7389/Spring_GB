@@ -1,4 +1,4 @@
-package Lesson_01_01;
+package Lesson_01_04;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -6,10 +6,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Client {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-        Camera camera = context.getBean("camera", Camera.class);
+        CameraNew camera = context.getBean("cameraScope", CameraImplComponent.class);
         camera.doPhoto();
 
-        Camera camera1 = context.getBean("cameraAnotherCameraRoll", Camera.class);
-        camera1.doPhoto();
+        camera.breaking();
+        camera.doPhoto();
+
+        CameraNew cameraNew = context.getBean("cameraScope", CameraImplComponent.class);
+        cameraNew.doPhoto();
+
+
     }
 }

@@ -6,10 +6,25 @@
                "http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
                http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:component-scan base-package="Lesson_01_02"/>
 
-    <bean id="cameraRoll" class="Lesson_01_01.BlackAndWhiteCameraRoll" />
+<bean id="cameraRoll" class="Lesson_01_01.BlackAndWhiteCameraRoll" />
 
     <bean id="camera" class="Lesson_01_01.CameraImpl">
         <property name="cameraRoll" ref="cameraRoll"/>
     </bean>
+
+    <bean id="cameraAnotherCameraRoll" class="Lesson_01_01.CameraImpl">
+        <property name="cameraRoll">
+            <bean class="Lesson_01_01.ColorCameraRoll"/>
+        </property>
+    </bean>
+
+    <bean id="cameraImplComponent" class="Lesson_01_02.CameraImplComponent">
+        <property name="cameraRoll" ref="ColorCameraRollComponent" >
+        </property>
+    </bean>
+
+
+    <context:component-scan base-package="Lesson_01_04"/>
 </beans>

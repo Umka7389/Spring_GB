@@ -1,6 +1,9 @@
 package Lesson_01_01;
 
 public class CameraImpl implements Camera {
+
+
+
     private CameraRoll cameraRoll;
 
     public CameraRoll getCameraRoll() {
