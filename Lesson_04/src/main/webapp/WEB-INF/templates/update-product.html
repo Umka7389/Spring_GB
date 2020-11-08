@@ -10,19 +10,19 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{navigation :: navigation(NewProduct)}"></div>
-    <form th:action="@{/products/new}" th:object="${product}" method="post">
+    <div th:replace="~{navigation :: navigation(Product)}"></div>
+    <form th:object="${updateProduct}" th:action="@{'/products/update?id='+ ${updateProduct.id} }"  method="post">
 
         <div class="form-group col-md-6">
             <label>Title</label>
-            <input class="form-control" placeholder="Title" th:field="*{title}">
+            <input class="form-control" name="title" th:placeholder="${updateProduct.title}" th:field="${updateProduct.title}">
         </div>
         <div class="form-group col-md-6">
             <label>Price</label>
-            <input class="form-control" placeholder="Price" th:field="*{price}">
+            <input class="form-control" name="price" th:placeholder="${updateProduct.price}" th:field="${updateProduct.price}">
         </div>
 
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-danger" type="submit">Update</button>
 
     </form>
 </div>

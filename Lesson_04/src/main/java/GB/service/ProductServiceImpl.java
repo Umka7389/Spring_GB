@@ -4,15 +4,14 @@ package GB.service;
 import GB.entity.Product;
 import GB.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
-import java.util.List;
-
 @Service
 public class ProductServiceImpl implements ProductService {
-
 
     private ProductRepository productRepo;
 
@@ -26,17 +25,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Product getById(Long id) {
         return productRepo.findById(id).orElse(null);
     }
 
-    @Override
-    @Transactional
-    public List<Product> getAllProducts() {
-        List<Product> products = productRepo.findAll();
-        products.sort(Comparator.comparingLong(Product::getId));
-        return products;
+
+    @Transactional(readOnly = true)
+    public Page<Product> getAllProducts(Specification<Product> spec, int page, int size ) {
+        return productRepo.findAll(spec, PageRequest.of(page, size));
     }
 
     @Override
@@ -45,10 +42,19 @@ public class ProductServiceImpl implements ProductService {
         productRepo.save(product);
     }
 
+
     @Override
     @Transactional
     public void removeProductById(Long id) {
         productRepo.deleteById(id);
+    }
+
+    @Override
+    public void updateProduct(Long id, String title, Double price) {
+        Product product = productRepo.findById(id).orElse(null);
+        product.setTitle(title);
+        product.setPrice(price);
+        productRepo.save(product);
     }
 
 
