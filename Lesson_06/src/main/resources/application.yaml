@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /app
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 2easy4umka
+    driver-class-name: org.postgresql.Driver
+
+
