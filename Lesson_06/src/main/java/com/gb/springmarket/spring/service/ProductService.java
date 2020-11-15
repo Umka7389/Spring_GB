@@ -11,9 +11,11 @@ public interface ProductService {
 
     public Page<Product> getAllProducts(Specification<Product> spec, int page, int size );
 
-    public void saveProduct(Product product);
+    public Product saveProduct(Product product);
 
     public void removeProductById(Long id);
 
-    public void updateProduct (Long id, String title, Double price);
+    public Product updateProduct (Long id, String title, Double price);
+
+    void deleteAll();
 }

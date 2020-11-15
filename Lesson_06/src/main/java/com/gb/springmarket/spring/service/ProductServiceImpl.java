@@ -38,8 +38,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void saveProduct(Product product) {
-        productRepo.save(product);
+    public Product saveProduct(Product product) {
+        return productRepo.save(product);
     }
 
 
@@ -50,11 +50,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(Long id, String title, Double price) {
+    public Product updateProduct(Long id, String title, Double price) {
         Product product = productRepo.findById(id).orElse(null);
         product.setTitle(title);
         product.setPrice(price);
-        productRepo.save(product);
+        return productRepo.save(product);
+    }
+
+    @Override
+    public void deleteAll() {
+        productRepo.deleteAll();
     }
 
 
